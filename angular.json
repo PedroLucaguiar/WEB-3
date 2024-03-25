@@ -23,6 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            
             "outputPath": "dist/web",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -35,9 +36,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+             
             ],
-            "scripts": []
+            "scripts": [
+              
+              
+            ]
           },
           "configurations": {
             "production": {
@@ -94,12 +98,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "1049a8af-5d64-4b26-9b43-4019dc2fd690"
   }
 }

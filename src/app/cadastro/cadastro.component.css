@@ -1,0 +1,27 @@
+body {
+    background-color: #f8f9fa; 
+}
+
+.form-container {
+    background-color: #fff; /* Cor de fundo para o contêiner do formulário */ /*Voltar quando ativar a mudança de cor da página (DARK)*/
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    padding: 20px;
+}
+
+/* Estilos para os campos de formulário */
+.form-control {
+    border-radius: 5px; 
+    border-color: #ced4da; 
+}
+
+/* Estilos para o botão de cadastra */
+.btn-primary {
+    background-color: #007bff; 
+    border-color: #007bff; 
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+    border-color: #0056b3; /* Cor da borda ao passar o mouse */
+}

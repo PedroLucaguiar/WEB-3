@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-bs-theme="auto">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>NOZAMA STORE</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+
+
+
+<body>
+  <!--CABEÇALHO DA PÁGINA, O MENU EM CIMA-->
+  <header data-bs-theme="dark">
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"
+            viewBox="0 0 24 24">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+            <circle cx="12" cy="13" r="4" /></svg>
+          <strong>Perfil</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+          aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!--CABEÇALHO DA PÁGINA, O MENU EM CIMA-->
+
+
+
+  <!--MODAL PARA ADICIONAR OS NOVOS PRODUTOS-->
+  <ng-template #adicionarProdutoModal>
+    <div class="modal-header">
+
+      <h5 class="modal-title" id="adicionarProdutoModalLabel">Adicionar Novo Produto</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modalService.dismissAll()"></button>
+    </div>
+    <div class="modal-body">
+
+      <div class="mb-3">
+        <label for="nomeProduto" class="form-label">Nome do Produto</label>
+        <input type="text" class="form-control" id="nomeProduto" name="nomeProduto"
+          [(ngModel)]="dadosProduto.nomeProduto" required>
+        <div *ngIf="!dadosProduto.nomeProduto" class="text-danger">Campo obrigatório.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="precoProduto" class="form-label">Preço do Produto</label>
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroupPrepend">R$</span>
+          <input type="text" class="form-control" id="precoProduto" name="precoProduto"
+            [(ngModel)]="dadosProduto.precoProduto" appOnlyNumbers required>
+        </div>
+        <div *ngIf="!dadosProduto.precoProduto" class="text-danger">Campo obrigatório.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="tamanhoProduto" class="form-label">Tamanho do Produto</label>
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroupPrepend">CM</span>
+          <input type="text" class="form-control" id="tamanhoProduto" name="tamanhoProduto"
+            [(ngModel)]="dadosProduto.tamanhoProduto" appOnlyNumbers required>
+        </div>
+        <div *ngIf="!dadosProduto.tamanhoProduto" class="text-danger">Campo obrigatório.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="pesoProduto" class="form-label">Peso do Produto</label>
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroupPrepend">KG</span>
+          <input type="text" class="form-control" id="pesoProduto" name="pesoProduto"
+            [(ngModel)]="dadosProduto.pesoProduto" appOnlyNumbers required>
+        </div>
+        <div *ngIf="!dadosProduto.pesoProduto" class="text-danger">Campo obrigatório.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="imagemProduto" class="form-label">Imagem do Produto</label>
+        <input type="text" class="form-control" id="imagemProduto" name="imagemProduto"
+          [(ngModel)]="dadosProduto.imagemProduto" required>
+        <div *ngIf="!dadosProduto.imagemProduto" class="text-danger">Campo obrigatório.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="disponivelProduto" class="form-label">Disponibilidade</label>
+        <select class="form-control" id="disponivelProduto" name="disponivelProduto"
+          [(ngModel)]="dadosProduto.disponivelProduto" required>
+          <div *ngIf="!dadosProduto.disponivelProduto" class="text-danger">Campo obrigatório.</div>
+          <option value="sim">Sim</option>
+          <option value="não">Não</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="categoriaProduto" class="form-label">Categoria</label>
+        <select class="form-control" id="categoriaProduto" name="categoriaProduto"
+          [(ngModel)]="dadosProduto.categoriaProduto" required>
+          <div *ngIf="!dadosProduto.categoriaProduto" class="text-danger">Campo obrigatório.</div>
+          <option value="">Tipo de Produto</option>
+          <option value="eletronico">Eletrônico</option>
+          <option value="roupas">Roupas</option>
+          <option value="alimentos">Alimentos</option>
+          <option value="decoração">Decoração</option>
+          <option value="joias">Joias</option>
+          <option value="veiculos">Veículos</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="estoqueProduto" class="form-label">Estoque</label>
+        <input type="number" class="form-control" id="estoqueProduto" name="estoqueProduto"
+          [(ngModel)]="dadosProduto.estoqueProduto" required>
+        <div *ngIf="!dadosProduto.estoqueProduto" class="text-danger">Campo obrigatório.</div>
+      </div>
+      <!-- Adicione mais campos conforme necessário -->
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modalService.dismissAll()">Fechar</button>
+      <div class="col-12">
+        <!-- Atualize o botão Cadastrar -->
+        <button class="btn btn-primary" type="button" (click)="onSubmit()">Cadastrar</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <!--MODAL PARA ADICIONAR OS NOVOS PRODUTOS-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--<button class="btn btn-primary" (click)="carregarProdutos()">Carregar Produtos</button>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--THUMBANAIL E A PÁGINA EM SÍ-->
+  <main>
+    <section class="py-5 text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <h1 class="fw-light">Confira Produtos em Nosso Site</h1>
+            <p class="lead text-secondary">Confira mais de 10.000 produtos no nosso site com nossos vendedores parceiros
+              100% verificados. É rápido e fácil: escolheu, clicou e comprou. Ou invista em nossa plataforma e venha ser
+              um vendedor recorde de vendas. Cadastre-se e monte sua loja hoje mesmo.</p>
+            <p>
+              <p>
+                <a (click)="redirectToCadastro('vendedor')" class="btn btn-primary my-2">Cadastre-se como Vendedor</a>
+                <a (click)="redirectToCadastro('cliente')" class="btn btn-secondary my-2">Cadastre-se como Cliente</a>
+              </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="album py-5 bg-light">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <!-- Produto 1 -->
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+              <div class="card-body">
+                <p class="card-text">Descrição do produto site inicial</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button (click)="abrirModalAdicionarProduto(adicionarProdutoModal)"
+                      class="btn btn-sm btn-outline-primary">Adicionar Produto</button>
+                  </div>
+                  <small class="text-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Adicionar mais produtos conforme necessário manualmente, lembrar que o BD irá puxar -->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Este é o contêiner onde os cards de produtos serão adicionados dinamicamente -->
+    <div id="cardsContainer" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"></div>
+  </main>
+  <!--THUMBANAIL E A PÁGINA EM SÍ-->
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Preço</th>
+        <th scope="col">tamanho</th>
+        <th scope="col">peso</th>
+        <th scope="col">imagem</th>
+        <th scope="col">disponivel</th>
+        <th scope="col">categoria</th>
+        <th scope="col">estoque</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produto of listaProdutos">
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.preco }}</td>
+        <td>{{ produto.tamanho }}</td>
+        <td>{{ produto.peso }}</td>
+        <td>{{ produto.imagem }}</td>
+        <td>{{ produto.disponivel }}</td>
+        <td>{{ produto.categoria }}</td>
+        <td>{{ produto.estoque }}</td>
+        <button (click)="excluirProduto(produto.idprodutos)">Excluir</button>
+        <button (click)="editarProduto(produto.idprodutos)">Editar</button>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+
+
+
+
+  <!--APENAS O RODAPÉ DA PÁGINA-->
+  <footer class="text-body-secondary py-5">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Voltar ao Topo</a>
+      </p>
+      <p class="mb-1">100% Verificado &copy; Bootstrap, Trabalho Final WEB III!</p>
+      <p class="mb-0">Conheça Outros Projetos <a href="/">GitHub</a> ou conheça minha experiência <a
+          href="/docs/5.3/getting-started/introduction/">LinkedIn</a>.</p>
+    </div>
+  </footer>
+  <!--APENAS O RODAPÉ DA PÁGINA-->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
