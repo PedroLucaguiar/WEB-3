@@ -22,7 +22,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule, // Adicione o HttpClientModule aqui
+    FormsModule,
     AppRoutingModule,
     CarouselModule.forRoot()
   ],

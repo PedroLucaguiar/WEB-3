@@ -1,2 +1,29 @@
 
-@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+/*@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';*/
+
+
+.navbar {
+    background-color: #bebebe !important;
+}
+  
+.navbar-nav .nav-item {
+    margin-right: 10px;
+  }
+  
+
+  
+  .navbar-nav .nav-item a {
+    color: #ff0000 !important;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  
+  .navbar-nav .nav-item a.nav-link {
+    color: #ff0000 !important;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+
+

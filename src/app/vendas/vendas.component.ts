@@ -13,6 +13,8 @@ export class VendasComponent implements OnInit {
   dadosProduto: any = {};
   listaProdutos: any[] = [];
   produtoEmEdicao: any = null; // Variável para armazenar o produto em edição
+  termoBusca: string = ''; // Variável para armazenar o termo de busca
+
   @ViewChild('adicionarProdutoModal') adicionarProdutoModal!: TemplateRef<any>;
 
   constructor(private router: Router,
@@ -74,6 +76,30 @@ export class VendasComponent implements OnInit {
         }
       );
   }
+
+
+ buscarProduto(): void {
+    // Fazer a busca dos produtos com base no termo de busca
+    // Por exemplo, você pode filtrar a lista de produtos com base no nome ou em outros critérios relevantes
+    // Aqui estou filtrando apenas pelo nome do produto, mas você pode adaptar conforme necessário
+    this.http.get<any[]>('http://localhost:3000/api/vendas')
+      .subscribe(
+        response => {
+          this.listaProdutos = response.filter(produto =>
+            produto.nome.toLowerCase().includes(this.termoBusca.toLowerCase())
+          );
+          console.log('Produtos encontrados:', this.listaProdutos);
+        },
+        error => {
+          console.error('Erro ao buscar produtos:', error);
+        }
+      );
+  }
+
+
+
+
+
 
 
 
